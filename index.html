@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Story Generator</title>
+  </head>
+  <body>
+    <form id="generate-form">
+      <label for="race-select">Select a race:</label>
+      <select id="race-select" name="race">
+        <option value="human">Human</option>
+        <option value="elf">Elf</option>
+        <option value="dwarf">Dwarf</option>
+        <option value="halfling">Halfling</option>
+      </select>
+      <br><br>
+      <label for="class-select">Select a class:</label>
+      <select id="class-select" name="classType">
+        <option value="fighter">Fighter</option>
+        <option value="cleric">Cleric</option>
+        <option value="wizard">Wizard</option>
+        <option value="rogue">Rogue</option>
+      </select>
+      <br><br>
+      <input type="submit" value="Generate Story">
+    </form>
+
+    <div id="story-container"></div>
+
+    <script>
+      const form = document.getElementById('generate-form');
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+
+        const formData = new FormData(form);
+        const data = Object.fromEntries(formData.entries());
+
+        fetch('/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+          .then(response => response.text())
+          .then(story => {
+            const storyContainer = document.getElementById('story-container');
+            storyContainer.innerText = story;
+          })
+          .catch(error => console.log(error));
+      });
+    </script>
+  </body>
+</html>
