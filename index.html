@@ -2,23 +2,113 @@
 <html>
   <head>
     <title>Story Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        max-width: 400px;
+        margin: 0 auto;
+      }
+
+      label {
+        font-size: 1.1em;
+        margin-bottom: 10px;
+      }
+
+      select {
+        width: 100%;
+        padding: 10px;
+        font-size: 1em;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        margin-bottom: 20px;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 1em;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #0056b3;
+      }
+
+      #story-container {
+        margin-top: 10px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        max-width: 800px;
+        margin: 30px auto;
+        font-size: 1.1em;
+        line-height: 1.6;
+      }
+    </style>
   </head>
   <body>
+    <h1>D&D Character Backstory Generator</h1>
     <form id="generate-form">
+      <label for="gender-select">Select a gender:</label>
+      <select id="gender-select" name="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="non-binary">Non-binary</option>
+      </select>
+      <br><br>
       <label for="race-select">Select a race:</label>
       <select id="race-select" name="race">
         <option value="human">Human</option>
         <option value="elf">Elf</option>
         <option value="dwarf">Dwarf</option>
         <option value="halfling">Halfling</option>
+        <option value="dragonborn">Dragonborn</option>
+        <option value="gnome">Gnome</option>
+        <option value="half-elf">Half-Elf</option>
+        <option value="half-orc">Half-Orc</option>
+        <option value="tiefling">Tiefling</option>
+        <option value="aarakocra">Aarakocra</option>
+        <option value="genasi">Genasi</option>
+        <option value="goliath">Goliath</option>
+        <option value="tabaxi">Tabaxi</option>
       </select>
       <br><br>
       <label for="class-select">Select a class:</label>
       <select id="class-select" name="classType">
-        <option value="fighter">Fighter</option>
+        <option value="barbarian">Barbarian</option>
+        <option value="bard">Bard</option>
         <option value="cleric">Cleric</option>
-        <option value="wizard">Wizard</option>
+        <option value="druid">Druid</option>
+        <option value="fighter">Fighter</option>
+        <option value="monk">Monk</option>
+        <option value="paladin">Paladin</option>
+        <option value="ranger">Ranger</option>
         <option value="rogue">Rogue</option>
+        <option value="sorcerer">Sorcerer</option>
+        <option value="warlock">Warlock</option>
+        <option value="wizard">Wizard</option>
       </select>
       <br><br>
       <input type="submit" value="Generate Story">
