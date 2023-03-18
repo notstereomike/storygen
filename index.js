@@ -22,7 +22,7 @@ app.post('/generate', (req, res) => {
     const { gender, race, classType } = req.body;
 
     const params = {
-        "prompt": `Write complete and concise 300 word backstory for a fictional D&D Charecter who is a ${gender} ${race} ${classType} character. Ensure the whole story is complete`, 
+        "prompt": `Write complete and concise 300 word backstory for a fictional D&D Charecter who is a ${gender} ${race} ${classType} character.`, 
         max_tokens: 300,
         temperature: 0.7,
         top_p: 1,
