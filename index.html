@@ -128,6 +128,22 @@
     transform: rotate(360deg);
   }
 }
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.checkbox-container label {
+  margin-right: 10px;
+}
+      .image-container {
+  display: flex;
+  justify-content: center;
+}
+
+
 
 </style>
 
@@ -174,6 +190,14 @@
         <option value="warlock">Warlock</option>
         <option value="wizard">Wizard</option>
       </select>
+      <br>
+<div class="checkbox-container">
+  <label for="generate-image-checkbox">Generate Image?</label>
+  <input type="checkbox" id="generate-image" name="generateImage" />
+</div>
+
+<br><br>
+
       <br><br>
       <input type="submit" value="Generate Story">
     </form>
@@ -181,6 +205,11 @@
 
 
     <div id="story-container"></div>
+    <div class="image-container">
+  <img id="generated-image" src="" alt="" style="display: none; width: 100%; max-width: 256px; margin: 30px auto;" />
+</div>
+
+
 
     <script>
       const form = document.getElementById('generate-form');
@@ -195,15 +224,28 @@ form.addEventListener('submit', (event) => {
   // Show the loading spinner
   loadingSpinner.style.display = 'block';
 
-  fetch('/generate', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(data)
-  })
-    .then(response => response.text())
-    .then(story => {
-      const storyContainer = document.getElementById('story-container');
-      storyContainer.innerText = story;
+ fetch('/generate', {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(data)
+})
+  .then(response => response.json())
+  .then(result => {
+    const storyContainer = document.getElementById('story-container');
+    storyContainer.innerHTML = ''; // Clear previous content
+    const storyText = document.createElement('p');
+    storyText.innerText = result.story;
+    storyContainer.appendChild(storyText);
+
+    if (result.imageUrl) {
+      const image = document.createElement('img');
+      image.src = result.imageUrl;
+      image.alt = 'Generated character image';
+      image.style.width = '100%';
+      image.style.maxWidth = '256px';
+      image.style.borderRadius = '5px';
+      storyContainer.appendChild(image);
+    }
 
       // Hide the loading spinner
       loadingSpinner.style.display = 'none';
